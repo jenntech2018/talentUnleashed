@@ -1,0 +1,31 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'landing/style.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Talent Unleashed</title>
+  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+</head>
+<body>
+  <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
+<div class="intro-container">
+  <h1>Welcome to Talent Unleashed</h1>
+  <p>
+    Oregon’s Got Heart is more than a talent show — it’s a celebration of local creativity, courage, and connection.
+    Whether you're a singer, dancer, poet, juggler, or dreamer, this is your stage.
+  </p>
+  <p>
+    We’re building a community-powered platform where talent meets opportunity, and every voice gets heard.
+    Auditions, voting, sponsorships, and heartwarming stories all start here.
+  </p>
+  <a href="{% url 'register' %}" class="button center-button">Register Now</a>
+</div>
+</body>
+<footer>
+  <h3>&copy; 2025 Talent Unleashed – Oregon’s Got Heart</h3>
+</footer>
+</html>

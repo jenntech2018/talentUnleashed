@@ -1,0 +1,33 @@
+{% load static %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Talent Unleashed</title>
+  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Talent Unleashed</title>
+  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+</head>
+<body>
+  <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
+
+<div class="form-wrapper">
+  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Left" class="side-light">
+  
+  <div class="form-container">
+    <h2>Register as a Contestant</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+    <h3>&copy; 2025 Talent Unleashed – Oregon’s Got Heart</h3>
+  </div>
+
+  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Right" class="side-light">
+</div>
+</body>
