@@ -17,7 +17,7 @@ def register(request):
             try:
                 send_mail(
                     subject="New Talent Unleashed Registration",
-                    message=f"{contestant.name} just registered!\nEmail: {contestant.email}",
+                    message=f"{contestant.name} just registered - Their talent is: {contestant.talent_description}!\nEmail: {contestant.email}",
                     from_email=None,  # uses DEFAULT_FROM_EMAIL from settings.py
                     recipient_list=["jenntech2018@gmail.com"],
                     fail_silently=False  # set to True if you want to suppress errors
