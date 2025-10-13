@@ -23,7 +23,7 @@ def register(request):
                 # Email to admin
                 send_mail(
                     subject="New Talent Unleashed Registration",
-                    message=f"{contestant.name} just registered!\nEmail: {contestant.email}",
+                    message=f"{contestant.name} just registered with a talent of {contestant.talent_description}!\nEmail: {contestant.email}",
                     from_email='jenntech2018@gmail.com',
                     recipient_list=["jenntech2018@gmail.com"],
                     fail_silently=False
