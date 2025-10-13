@@ -34,9 +34,9 @@ def register(request):
                     subject="Portland Brings Talent Registration Received",
                     message=(
                         f"Hi {contestant.name_or_group_name},\n\n"
-                        "Thanks for registering for Talent Unleashed! "
+                        "Thanks for registering for Portland Brings Talent! "
                         "We’ve received your submission and will be in touch soon.\n\n"
-                        "Best,\nThe Talent Unleashed Team"
+                        "Best,\nThe Portland Brings Talent Team"
                     ),
                     from_email='jenntech2018@gmail.com',
                     recipient_list=[contestant.email],
