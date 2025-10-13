@@ -23,7 +23,7 @@ def register(request):
                 # Email to admin
                 send_mail(
                     subject="New Portland Brings Talent Registration",
-                    message=f"{contestant.name} just registered with a talent of {contestant.talent_description}!\nEmail: {contestant.email}",
+                    message=f"{contestant.name_or_group_name} just registered with a talent of {contestant.talent_description}!\nEmail: {contestant.email}",
                     from_email='jenntech2018@gmail.com',
                     recipient_list=["jenntech2018@gmail.com"],
                     fail_silently=False
@@ -33,7 +33,7 @@ def register(request):
                 send_mail(
                     subject="Portland Brings Talent Registration Received",
                     message=(
-                        f"Hi {contestant.name},\n\n"
+                        f"Hi {contestant.name_or_group_name},\n\n"
                         "Thanks for registering for Talent Unleashed! "
                         "We’ve received your submission and will be in touch soon.\n\n"
                         "Best,\nThe Talent Unleashed Team"
