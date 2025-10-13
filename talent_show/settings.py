@@ -95,5 +95,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jenntech2018@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'admin@TalentUnleashed.com'
+DEFAULT_FROM_EMAIL = 'jenntech2018@gmail.com'
 
