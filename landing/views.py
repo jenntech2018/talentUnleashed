@@ -9,23 +9,44 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+from django.core.mail import send_mail, BadHeaderError
+import logging
+
+logger = logging.getLogger(__name__)
+
 def register(request):
     if request.method == 'POST':
         form = ContestantForm(request.POST)
         if form.is_valid():
             contestant = form.save()
             try:
+                # Email to admin
                 send_mail(
                     subject="New Talent Unleashed Registration",
-                    message=f"{contestant.name} just registered - Their talent is: {contestant.talent_description}!\nEmail: {contestant.email}",
-                    from_email=None,  # uses DEFAULT_FROM_EMAIL from settings.py
+                    message=f"{contestant.name} just registered!\nEmail: {contestant.email}",
+                    from_email='jenntech2018@gmail.com',
                     recipient_list=["jenntech2018@gmail.com"],
-                    fail_silently=False  # set to True if you want to suppress errors
+                    fail_silently=False
                 )
+
+                # Email to contestant
+                send_mail(
+                    subject="Talent Unleashed Registration Received",
+                    message=(
+                        f"Hi {contestant.name},\n\n"
+                        "Thanks for registering for Talent Unleashed! "
+                        "We’ve received your submission and will be in touch soon.\n\n"
+                        "Best,\nThe Talent Unleashed Team"
+                    ),
+                    from_email='jenntech2018@gmail.com',
+                    recipient_list=[contestant.email],
+                    fail_silently=False
+                )
+
             except BadHeaderError:
                 logger.error("Invalid header found in registration email.")
             except Exception as e:
-                logger.error(f"Email send failed: {e}")
+                logger.exception("Email send failed")
             return redirect('thank_you')
     else:
         form = ContestantForm()
