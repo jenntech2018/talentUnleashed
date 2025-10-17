@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def register(request):
     if request.method == 'POST':
-        form = ContestantForm(request.POST)
+        form = ContestantForm(request.POST, request.FILES)
         if form.is_valid():
             is_group = form.cleaned_data.get('is_group')
             group_size = form.cleaned_data.get('group_size')
@@ -25,17 +25,27 @@ def register(request):
                 form.add_error('group_size', 'Please specify the number of participants.')
             else:
                 contestant = form.save()
+
+                # Prepare email with attachment
                 try:
-                    # Email to admin
-                    send_mail(
+                    from django.core.mail import EmailMessage
+
+                    admin_email = EmailMessage(
                         subject="New Portland Brings Talent Registration",
-                        message=f"{contestant.name_or_group_name} just registered with a talent of {contestant.talent_description}!\nEmail: {contestant.email}",
+                        body=(
+                            f"{contestant.name_or_group_name} just registered with a talent of {contestant.talent_description}!\n"
+                            f"Email: {contestant.email}"
+                        ),
                         from_email='jenntech2018@gmail.com',
-                        recipient_list=["jenntech2018@gmail.com"],
-                        fail_silently=False
+                        to=["jenntech2018@gmail.com"]
                     )
 
-                    # Email to contestant
+                    if contestant.video_submission:
+                        admin_email.attach_file(contestant.video_submission.path)
+
+                    admin_email.send()
+
+                    # Confirmation email to contestant
                     send_mail(
                         subject="Portland Brings Talent Registration Received",
                         message=(
@@ -49,8 +59,6 @@ def register(request):
                         fail_silently=False
                     )
 
-                except BadHeaderError:
-                    logger.error("Invalid header found in registration email.")
                 except Exception as e:
                     logger.exception("Email send failed")
 
