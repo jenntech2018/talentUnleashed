@@ -13,17 +13,20 @@
   <link rel="stylesheet" href="{% static 'landing/style.css' %}">
 </head>
 <script>
-  const toggle = document.getElementById("id_is_group");
-  const groupField = document.getElementById("groupSizeField");
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("id_is_group");
+    const groupField = document.getElementById("groupSizeField");
 
-  function toggleGroupField() {
-    groupField.style.display = toggle.checked ? "block" : "none";
-  }
+    function toggleGroupField() {
+      groupField.style.display = toggle.checked ? "block" : "none";
+    }
 
-  toggle.addEventListener("change", toggleGroupField);
-  window.addEventListener("load", toggleGroupField);
-</script>
-<body>
+    if (toggle) {
+      toggle.addEventListener("change", toggleGroupField);
+      toggleGroupField(); // initialize on load
+    }
+  });
+</script><body>
   <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
 
 <div class="form-wrapper">
