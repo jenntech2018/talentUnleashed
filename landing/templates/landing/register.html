@@ -43,9 +43,11 @@
   {{ form.group_size.label_tag }} {{ form.group_size }}
   {{ form.talent_description.label_tag }} {{ form.talent_description }}
 
-  <label for="id_is_group">
-    {{ form.is_group }} {{ form.is_group.label }}
-  </label>
+<div class="form-row">
+  <label for="id_is_group">Is this a group performance?</label>
+  {{ form.is_group }}
+</div>
+
 
   <div id="groupSizeField" style="display: none;">
     {{ form.group_size.label_tag }} {{ form.group_size }}
