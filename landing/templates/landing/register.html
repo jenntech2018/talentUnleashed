@@ -15,19 +15,20 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("id_is_group");
+    const groupField = document.getElementById("groupSizeField");
 
     function toggleGroupField() {
-      groupField.style.display = toggle.checked ? "block" : "none";
+      if (groupField && toggle) {
+        groupField.style.display = toggle.checked ? "block" : "none";
+      }
     }
 
     if (toggle) {
       toggle.addEventListener("change", toggleGroupField);
-          const groupField = document.getElementById("groupSizeField");
-
-      toggleGroupField(); // initialize on load
+      toggleGroupField(); // run on load
     }
   });
-</script><body>
+</script>
   <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
 
 <div class="form-wrapper">
