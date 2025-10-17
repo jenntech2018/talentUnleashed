@@ -18,40 +18,47 @@ def register(request):
     if request.method == 'POST':
         form = ContestantForm(request.POST)
         if form.is_valid():
-            contestant = form.save()
-            try:
-                # Email to admin
-                send_mail(
-                    subject="New Portland Brings Talent Registration",
-                    message=f"{contestant.name_or_group_name} just registered with a talent of {contestant.talent_description}!\nEmail: {contestant.email}",
-                    from_email='jenntech2018@gmail.com',
-                    recipient_list=["jenntech2018@gmail.com"],
-                    fail_silently=False
-                )
+            is_group = form.cleaned_data.get('is_group')
+            group_size = form.cleaned_data.get('group_size')
 
-                # Email to contestant
-                send_mail(
-                    subject="Portland Brings Talent Registration Received",
-                    message=(
-                        f"Hi {contestant.name_or_group_name},\n\n"
-                        "Thanks for registering for Portland Brings Talent! "
-                        "We’ve received your submission and will be in touch soon.\n\n"
-                        "Best,\nThe Portland Brings Talent Team"
-                    ),
-                    from_email='jenntech2018@gmail.com',
-                    recipient_list=[contestant.email],
-                    fail_silently=False
-                )
+            if is_group and not group_size:
+                form.add_error('group_size', 'Please specify the number of participants.')
+            else:
+                contestant = form.save()
+                try:
+                    # Email to admin
+                    send_mail(
+                        subject="New Portland Brings Talent Registration",
+                        message=f"{contestant.name_or_group_name} just registered with a talent of {contestant.talent_description}!\nEmail: {contestant.email}",
+                        from_email='jenntech2018@gmail.com',
+                        recipient_list=["jenntech2018@gmail.com"],
+                        fail_silently=False
+                    )
 
-            except BadHeaderError:
-                logger.error("Invalid header found in registration email.")
-            except Exception as e:
-                logger.exception("Email send failed")
-            return redirect('thank_you')
+                    # Email to contestant
+                    send_mail(
+                        subject="Portland Brings Talent Registration Received",
+                        message=(
+                            f"Hi {contestant.name_or_group_name},\n\n"
+                            "Thanks for registering for Portland Brings Talent! "
+                            "We’ve received your submission and will be in touch soon.\n\n"
+                            "Best,\nThe Portland Brings Talent Team"
+                        ),
+                        from_email='jenntech2018@gmail.com',
+                        recipient_list=[contestant.email],
+                        fail_silently=False
+                    )
+
+                except BadHeaderError:
+                    logger.error("Invalid header found in registration email.")
+                except Exception as e:
+                    logger.exception("Email send failed")
+
+                return redirect('thank_you')
     else:
         form = ContestantForm()
-    return render(request, 'landing/register.html', {'form': form})
 
+    return render(request, 'landing/register.html', {'form': form})
 
 def thank_you(request):
     return render(request, 'landing/thank_you.html')

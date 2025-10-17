@@ -12,6 +12,17 @@
   <title>Talent Unleashed</title>
   <link rel="stylesheet" href="{% static 'landing/style.css' %}">
 </head>
+<script>
+  const toggle = document.getElementById("id_is_group");
+  const groupField = document.getElementById("groupSizeField");
+
+  function toggleGroupField() {
+    groupField.style.display = toggle.checked ? "block" : "none";
+  }
+
+  toggle.addEventListener("change", toggleGroupField);
+  window.addEventListener("load", toggleGroupField);
+</script>
 <body>
   <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
 
@@ -20,11 +31,23 @@
   
   <div class="form-container">
     <h2>Register as a Contestant</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Submit</button>
-    </form>
+  <form method="post">
+  {% csrf_token %}
+
+  {{ form.name_or_group_name.label_tag }} {{ form.name_or_group_name }}
+  {{ form.email.label_tag }} {{ form.email }}
+  {{ form.talent_description.label_tag }} {{ form.talent_description }}
+
+  <label for="id_is_group">
+    {{ form.is_group }} {{ form.is_group.label }}
+  </label>
+
+  <div id="groupSizeField" style="display: none;">
+    {{ form.group_size.label_tag }} {{ form.group_size }}
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
     <h3>&copy; 2025 Portland Brings Talent</h3>
   </div>
 
