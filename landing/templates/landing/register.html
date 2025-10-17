@@ -15,7 +15,6 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("id_is_group");
-    const groupField = document.getElementById("groupSizeField");
 
     function toggleGroupField() {
       groupField.style.display = toggle.checked ? "block" : "none";
@@ -23,6 +22,8 @@
 
     if (toggle) {
       toggle.addEventListener("change", toggleGroupField);
+          const groupField = document.getElementById("groupSizeField");
+
       toggleGroupField(); // initialize on load
     }
   });
@@ -34,20 +35,16 @@
   
   <div class="form-container">
     <h2>Register as a Contestant</h2>
-  <form method="post">
+ <form method="post">
   {% csrf_token %}
 
   {{ form.name_or_group_name.label_tag }} {{ form.name_or_group_name }}
   {{ form.email.label_tag }} {{ form.email }}
-  {{ form.is_group.label_tag }} {{ form.is_group }}
-  {{ form.group_size.label_tag }} {{ form.group_size }}
   {{ form.talent_description.label_tag }} {{ form.talent_description }}
 
-<div class="form-row">
-  <label for="id_is_group">Is this a group performance?</label>
-  {{ form.is_group }}
-</div>
-
+  <div class="form-row">
+    {{ form.is_group }} <label for="id_is_group">Is this a group performance?</label>
+  </div>
 
   <div id="groupSizeField" style="display: none;">
     {{ form.group_size.label_tag }} {{ form.group_size }}
@@ -60,4 +57,19 @@
 
   <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Right" class="side-light">
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("id_is_group");
+    const groupField = document.getElementById("groupSizeField");
+
+    function toggleGroupField() {
+      groupField.style.display = toggle.checked ? "block" : "none";
+    }
+
+    if (toggle && groupField) {
+      toggle.addEventListener("change", toggleGroupField);
+      toggleGroupField(); // initialize on load
+    }
+  });
+</script>
 </body>
