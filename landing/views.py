@@ -1,18 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import ContestantForm
+from django.http import HttpResponse
+from django.core.mail import send_mail, EmailMessage, BadHeaderError
+import logging
+import os
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request, 'landing/home.html')
-
-from django.core.mail import send_mail, BadHeaderError
-import logging
-
-logger = logging.getLogger(__name__)
-
-from django.core.mail import send_mail, BadHeaderError
-import logging
-
-logger = logging.getLogger(__name__)
 
 def register(request):
     if request.method == 'POST':
@@ -26,10 +22,8 @@ def register(request):
             else:
                 contestant = form.save()
 
-                # Prepare email with attachment
                 try:
-                    from django.core.mail import EmailMessage
-
+                    # Prepare admin email
                     admin_email = EmailMessage(
                         subject="New Portland Brings Talent Registration",
                         body=(
@@ -40,8 +34,16 @@ def register(request):
                         to=["jenntech2018@gmail.com"]
                     )
 
+                    # Attach video if present
                     if contestant.video_submission:
-                        admin_email.attach_file(contestant.video_submission.path)
+                        try:
+                            video_path = contestant.video_submission.path
+                            if os.path.exists(video_path):
+                                admin_email.attach_file(video_path)
+                            else:
+                                logger.warning("Video file not found at: %s", video_path)
+                        except Exception as e:
+                            logger.exception("Failed to attach video file: %s", str(e))
 
                     admin_email.send()
 
@@ -60,7 +62,7 @@ def register(request):
                     )
 
                 except Exception as e:
-                    logger.exception("Email send failed")
+                    logger.exception("Email send failed: %s", str(e))
 
                 return redirect('thank_you')
     else:
