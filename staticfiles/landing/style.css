@@ -9,7 +9,6 @@ body {
   background-attachment: fixed;
   margin: 0;
   padding: 0;
-  color: #222;
 }
 
 h1, h2 {
@@ -19,15 +18,8 @@ h1, h2 {
 }
 
 h1 {
-  background: linear-gradient(90deg, #111, #333);
-  background-size: cover;
-  background-blend-mode: overlay;
-  padding: 15px;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  font-size: 2rem;
+  color: #c0392b;
 }
 
 h2 {
@@ -58,7 +50,6 @@ h3 {
    Navigation Bar
 ======================= */
 .navbar {
-  background: linear-gradient(90deg, #111, #333);
   background-size: cover;
   background-blend-mode: overlay;
   padding: 15px;
@@ -109,6 +100,8 @@ h3 {
   margin: 4rem auto;
   padding: 2rem;
   background: white;
+  color: black;
+  text-align: center;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -152,7 +145,7 @@ a.button,
 }
 
 button {
-  background-color: #c0392b;
+  background-color: #14e614;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
@@ -163,33 +156,31 @@ button {
 /* =======================
    Forms
 ======================= */
-form.contact-form {
-  max-width: 60%;
-  margin: 2rem auto;
-  padding: 2rem;
+form.contact-form h2 {
   background-color: transparent;
-  box-shadow: none;
-  color: #222;
+  color: #fff; /* or #ffc371 for warmth */
+  margin-bottom: 1rem;
 }
 
 form.contact-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
   color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 form.contact-form input,
 form.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
   background-color: #fff;
   color: #111;
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
   font-size: 1rem;
 }
+
 
 form.contact-form input::placeholder,
 form.contact-form textarea::placeholder {
@@ -208,7 +199,7 @@ form.contact-form button {
 }
 
 form.contact-form button:hover {
-  background-color: #d2f318;
+  background-color: #cde73c;
   transform: scale(1.05);
 }
 
