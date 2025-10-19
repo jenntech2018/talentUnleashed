@@ -10,6 +10,9 @@
   <p>
     Use the form below to reach out directly. This channel is for partnership and sponsorship inquiries only.
   </p>
+  <p>
+    If you are looking to register for our event please visit our <a href="{% url 'register' %}">Register</a> page.
+  </p>
 
   <form method="post" action="{% url 'partner_contact' %}" class="contact-form">
     {% csrf_token %}
