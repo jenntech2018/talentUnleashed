@@ -1,39 +1,27 @@
 {% extends 'landing/base.html' %}
-
 {% load static %}
-<link rel="stylesheet" href="{% static 'landing/style.css' %}">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>Talent Unleashed</title>
-  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
-</head>
-<body>
-  <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
-<div class="intro-container">
-<h1>🎤 Welcome to Portland Brings Talent 2026</h1>
-<h2>~ Where Local Legends Are Born ~</h2>
-<p>
-  Portland Brings Talent isn’t just a show — it’s a movement. A spotlight on the bold, the brilliant, and the beautifully weird. 
-  Whether you belt ballads, breakdance, juggle flaming torches, or turn dreams into magic, this is your moment to shine.
-</p>
-<p>
-  We’re calling on singers, dancers, poets, illusionists, comedians, and creators of every kind. If you’ve got heart, hustle, and a spark that won’t quit — we want you on our stage.
-</p>
-<a href="{% url 'register' %}" class="button center-button">✨ Claim Your Spotlight — Register Now!</a>
 
-<h1>🏆 Prizes, Glory & Bragging Rights</h1>
-<p>
-  Our prize pool is growing — and so is the buzz. Stay tuned for jaw-dropping announcements. 
-  Date, time, and venue will be revealed soon, but trust us: it’ll be worth the wait.
-</p>
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
+
+<div class="intro-container">
+  <h1>🎤 Welcome to Portland Brings Talent 2026</h1>
+  <h2>~ Where Local Legends Are Born ~</h2>
+  <p>
+    Portland Brings Talent isn’t just a show — it’s a movement. A spotlight on the bold, the brilliant, and the beautifully weird. 
+    Whether you belt ballads, breakdance, juggle flaming torches, or turn dreams into magic, this is your moment to shine.
+  </p>
+  <p>
+    We’re calling on singers, dancers, poets, illusionists, comedians, and creators of every kind. If you’ve got heart, hustle, and a spark that won’t quit — we want you on our stage.
+  </p>
+  <a href="{% url 'register' %}" class="button center-button">✨ Claim Your Spotlight — Register Now!</a>
+
+  <h1>🏆 Prizes, Glory & Bragging Rights</h1>
+  <p>
+    Our prize pool is growing — and so is the buzz. Stay tuned for jaw-dropping announcements. 
+    Date, time, and venue will be revealed soon, but trust us: it’ll be worth the wait.
+  </p>
 </div>
-</body>
-<footer>
-  <h3>&copy; 2025 Portland Brings Talent</h3>
-</footer>
-</html>
+{% endblock %}
