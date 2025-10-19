@@ -7,7 +7,19 @@
   <title>{% block title %}Talent Unleashed{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'landing/style.css' %}">
   <style>
-    body {
+  .navbar {
+    background: linear-gradient(90deg, #111, #333);
+    padding: 15px;
+    text-align: center;
+  }
+
+  .navbar a {
+    color: #fff;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+   body {
       background-image: url("{% static 'landing/home-background.png' %}");
       background-size: cover;
       background-position: center;
@@ -16,10 +28,9 @@
       color: #f0f0f0;
     }
 
-    .navbar {
-      background-image: url("{% static 'landing/spray-texture.png' %}");
-    }
-  </style>
+</style>
+   
+
 </head>
 <body>
   <nav class="navbar">
