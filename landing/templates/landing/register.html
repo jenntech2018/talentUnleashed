@@ -17,11 +17,14 @@
 
   <label for="talent">Talent Description</label>
   <textarea name="talent" id="talent" rows="6" required></textarea>
-
+  
   <label for="group_toggle">
-    <input type="checkbox" name="is_group" id="group_toggle">
+  <input type="checkbox" name="is_group" id="group_toggle">
     Is this a group performance?
   </label>
+   <div id="groupSizeField" style="display: none;">
+    {{ form.group_size.label_tag }} {{ form.group_size }}
+  </div>
 
   <label for="video">Video Submission</label>
   <input type="file" name="video" id="video" accept="video/*">
