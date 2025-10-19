@@ -128,7 +128,14 @@ h1, h2 {
 h3 {
   text-align: center;
   font-size: medium;
-  color: rgb(0, 255, 136);
+  color: rgb(242, 247, 245);
+}
+
+h2 {
+  text-align: center;
+  font-size: large;
+  color: white;
+  border:color-mix(in hsl shorter hue, color percentage, color percentage)
 }
 
 /* Buttons and links */
