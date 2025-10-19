@@ -1,20 +1,34 @@
 {% extends 'landing/base.html' %}
 {% load static %}
-{% block title %}Portland Brings Talent - Register{% endblock %}
+{% block title %}Portland Brings Talent – Register{% endblock %}
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>Talent Unleashed</title>
-  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
-</head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>Talent Unleashed</title>
-  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
-</head>
+{% block content %}
+<img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
+
+<div class="form-wrapper">
+  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Left" class="side-light">
+
+  <div class="form-container">
+    <h2>Register as a Contestant</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.name_or_group_name.label_tag }} {{ form.name_or_group_name }}
+      {{ form.email.label_tag }} {{ form.email }}
+      {{ form.talent_description.label_tag }} {{ form.talent_description }}
+      {{ form.is_group }} <label for="id_is_group">Is this a group performance?</label>
+      <div id="groupSizeField" style="display: none;">
+        {{ form.group_size.label_tag }} {{ form.group_size }}
+      </div>
+      {{ form.video_submission.label_tag }} {{ form.video_submission }}
+      <button type="submit">Submit</button>
+    </form>
+
+    <h3>&copy; 2025 Portland Brings Talent</h3>
+  </div>
+
+  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Right" class="side-light">
+</div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("id_is_group");
@@ -32,45 +46,4 @@
     }
   });
 </script>
-  <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
-
-<div class="form-wrapper">
-  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Left" class="side-light">
-  
-  <div class="form-container">
-    <h2>Register as a Contestant</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <!-- Render fields individually -->
-  {{ form.name_or_group_name.label_tag }} {{ form.name_or_group_name }}
-  {{ form.email.label_tag }} {{ form.email }}
-  {{ form.talent_description.label_tag }} {{ form.talent_description }}
-  {{ form.is_group }} <label for="id_is_group">Is this a group performance?</label>
-  <div id="groupSizeField" style="display: none;">
-    {{ form.group_size.label_tag }} {{ form.group_size }}
-  </div>
-  {{ form.video_submission.label_tag }} {{ form.video_submission }}
-  <button type="submit">Submit</button>
-</form>
-
-    <h3>&copy; 2025 Portland Brings Talent</h3>
-  </div>
-
-  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Right" class="side-light">
-</div>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.getElementById("id_is_group");
-    const groupField = document.getElementById("groupSizeField");
-
-    function toggleGroupField() {
-      groupField.style.display = toggle.checked ? "block" : "none";
-    }
-
-    if (toggle && groupField) {
-      toggle.addEventListener("change", toggleGroupField);
-      toggleGroupField(); // initialize on load
-    }
-  });
-</script>
-</body>
+{% endblock %}
