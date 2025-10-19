@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.core.mail import send_mail, EmailMessage, BadHeaderError
 import logging
 import os
-from django.views.decorators.csrf import csrf_exempt
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +19,7 @@ def partners(request):
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_protect
 
-
+@csrf_protect
 def partner_contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
