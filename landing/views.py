@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, 
+from django.shortcuts import render, redirect
 from .forms import ContestantForm
 from django.http import HttpResponse
 from django.core.mail import send_mail, EmailMessage, BadHeaderError
@@ -20,7 +20,7 @@ def partners(request):
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_protect
 
-@csrf_exempt
+
 def partner_contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -38,7 +38,7 @@ def partner_contact(request):
         )
 
         return redirect('thank_you')
-@csrf_exempt
+
 def register(request):
     if request.method == 'POST':
         form = ContestantForm(request.POST, request.FILES)
