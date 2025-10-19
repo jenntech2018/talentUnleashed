@@ -5,11 +5,8 @@
 {% block content %}
 <img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
 
-<div class="form-wrapper">
-  <img src="{% static 'landing/stage-right.png' %}" alt="Stage Light Left" class="side-light">
-
   <div class="form-container">
-    <h2>Register as a Contestant</h2>
+    <h1>Register as a Contestant</h1>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.name_or_group_name.label_tag }} {{ form.name_or_group_name }}
