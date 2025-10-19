@@ -3,12 +3,10 @@
 ======================= */
 body {
   font-family: 'Segoe UI', 'Raleway', sans-serif;
-  background-image: url("{% static 'landing/home-background.png' %}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #222;
   margin: 0;
   padding: 0;
 }
