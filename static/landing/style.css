@@ -164,7 +164,8 @@ form.contact-form h2 {
 }
 
 form.contact-form label {
-  color: #fff;
+  background-color: goldenrod;
+  color:black;
   font-weight: 600;
   margin-bottom: 0.5rem;
   display: block;
