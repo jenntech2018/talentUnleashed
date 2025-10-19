@@ -10,6 +10,12 @@ logger = logging.getLogger(__name__)
 def home(request):
     return render(request, 'landing/home.html')
 
+def about(request):
+    return render(request, 'landing/about.html')
+
+def partners(request):
+    return render(request, 'landing/partners.html')
+
 def register(request):
     if request.method == 'POST':
         form = ContestantForm(request.POST, request.FILES)
