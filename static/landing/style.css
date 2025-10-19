@@ -3,7 +3,7 @@
 ======================= */
 body {
   font-family: 'Segoe UI', 'Raleway', sans-serif;
-  background-color: #d9eb0d71; /* warm peach */
+  background-image: url("{% static 'landing/home-background.png' %} stretch");
   color: #f0f0f0;
   margin: 0;
   padding: 0;

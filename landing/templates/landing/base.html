@@ -10,6 +10,14 @@
 <body>
  {% load static %}
 <style>
+   body {
+    background-image: url("{% static 'landing/home-background.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #f0f0f0;
+  }
   .navbar {
     background-image: url("{% static 'landing/spray-texture.png' %}");
     background-size: cover;
