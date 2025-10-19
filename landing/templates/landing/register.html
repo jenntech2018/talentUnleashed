@@ -3,22 +3,31 @@
 {% block title %}Portland Brings Talent – Register{% endblock %}
 
 {% block content %}
-<img src="{% static 'landing/logo.png' %}" alt="Talent Unleashed Logo" class="logo">
+ <div class="page-container">
+  <h1>🎤 Register as a Contestant</h1>
+  <p>Submit your talent and take the stage. We can't wait to see what you bring!</p>
+<form method="post" action="{% url 'register' %}" class="contact-form" enctype="multipart/form-data">
+  {% csrf_token %}
 
-  <div class="form-container">
-    <h1>Register as a Contestant</h1>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.name_or_group_name.label_tag }} {{ form.name_or_group_name }}
-      {{ form.email.label_tag }} {{ form.email }}
-      {{ form.talent_description.label_tag }} {{ form.talent_description }}
-      {{ form.is_group }} <label for="id_is_group">Is this a group performance?</label>
-      <div id="groupSizeField" style="display: none;">
-        {{ form.group_size.label_tag }} {{ form.group_size }}
-      </div>
-      {{ form.video_submission.label_tag }} {{ form.video_submission }}
-      <button type="submit">Submit</button>
-    </form>
+  <label for="name">Name or Group Name</label>
+  <input type="text" name="name" id="name" required>
+
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="talent">Talent Description</label>
+  <textarea name="talent" id="talent" rows="6" required></textarea>
+
+  <label for="group_toggle">
+    <input type="checkbox" name="is_group" id="group_toggle">
+    Is this a group performance?
+  </label>
+
+  <label for="video">Video Submission</label>
+  <input type="file" name="video" id="video" accept="video/*">
+
+  <button type="submit">Submit</button>
+</form>
 
     <h3>&copy; 2025 Portland Brings Talent</h3>
   </div>
