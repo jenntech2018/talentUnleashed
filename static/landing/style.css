@@ -3,8 +3,12 @@
 ======================= */
 body {
   font-family: 'Segoe UI', 'Raleway', sans-serif;
-  background-image: url("{% static 'landing/home-background.png' %} stretch");
-  color: #f0f0f0;
+  background-image: url("{% static 'landing/home-background.png' %}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #222;
   margin: 0;
   padding: 0;
 }
@@ -32,7 +36,7 @@ h2 {
 h3 {
   text-align: center;
   font-size: medium;
-  color: rgb(242, 247, 245);
+  color: #f2f7f5;
 }
 
 /* =======================
@@ -150,25 +154,41 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
-.page-container,
+
+/* =======================
+   Forms
+======================= */
 form.contact-form {
-  color: #f2f2f2; /* soft white for readability */
+  max-width: 60%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: transparent;
+  box-shadow: none;
+  color: #222;
 }
 
 form.contact-form label {
-  color: #f2f2f2;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #222;
 }
 
 form.contact-form input,
 form.contact-form textarea {
-  background-color: #2a2a2a;
-  color: #fff;
-  border: 1px solid #555;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #111;
+  font-size: 1rem;
 }
 
 form.contact-form input::placeholder,
 form.contact-form textarea::placeholder {
-  color: #aaa;
+  color: #666;
 }
 
 form.contact-form button {
@@ -184,39 +204,6 @@ form.contact-form button {
 
 form.contact-form button:hover {
   background-color: #444;
-}
-
-/* =======================
-   Forms
-======================= */
-form input,
-form textarea,
-form.contact-form input,
-form.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  background-color: #fff;
-  color: #111;
-  font-size: 1rem;
-}
-
-form.contact-form {
-  max-width: 60%;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-form.contact-form label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #222;
 }
 
 /* =======================
