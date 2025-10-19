@@ -6,30 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Portland Brings Talent{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+
+  <style>
+    body {
+      background-image: url("{% static 'landing/home-background.png' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #f0f0f0;
+    }
+
+    .navbar {
+      background-image: url("{% static 'landing/spray-texture.png' %}");
+      background-size: cover;
+      background-blend-mode: overlay;
+    }
+  </style>
 </head>
 <body>
- {% load static %}
-<style>
-   body {
-    background-image: url("{% static 'landing/home-background.png' %}");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: #f0f0f0;
-  }
-  .navbar {
-    background-image: url("{% static 'landing/spray-texture.png' %}");
-    background-size: cover;
-    background-blend-mode: overlay;
-  }
-</style>
+  <nav class="navbar">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'partners' %}">Partners & Sponsors</a>
+    <a href="{% url 'register' %}">Register</a>
+  </nav>
 
   <div class="content">
     {% block content %}{% endblock %}
   </div>
+
+  <footer>
+    <h3>&copy; 2025 Portland Brings Talent</h3>
+  </footer>
 </body>
-<footer>
-  <h3>&copy; 2025 Portland Brings Talent</h3>
-</footer>
 </html>
