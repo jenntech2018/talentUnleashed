@@ -51,6 +51,7 @@ h3 {
 ======================= */
 .navbar {
   background-size: cover;
+  background-color: #777;
   background-blend-mode: overlay;
   padding: 15px;
   text-align: center;
@@ -163,7 +164,8 @@ form.contact-form h2 {
 }
 
 form.contact-form label {
-  color: #fff;
+  background-color: goldenrod;
+  color:black;
   font-weight: 600;
   margin-bottom: 0.5rem;
   display: block;
