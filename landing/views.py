@@ -16,6 +16,28 @@ def about(request):
 def partners(request):
     return render(request, 'landing/partners.html')
 
+from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
+def partner_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        full_message = f"Partner Inquiry from {name} ({email}):\n\n{message}"
+
+        send_mail(
+            subject="New Partner/Sponsor Inquiry",
+            message=full_message,
+            from_email='jenntech2018@gmail.com',
+            recipient_list=['jenntech2018@gmail.com'],
+            fail_silently=False
+        )
+
+        return redirect('thank_you')
+
 def register(request):
     if request.method == 'POST':
         form = ContestantForm(request.POST, request.FILES)

@@ -1,16 +1,27 @@
 {% extends 'landing/base.html' %}
 {% block title %}Partners & Sponsors{% endblock %}
 {% block content %}
-<h1>🤝 Partners & Sponsorship</h1>
-<h2>
-  We’re building something big — and we’re looking for partners who believe in the power of local talent.
-</h2>
-<ul>
-  <li>🎟️ Sponsor a performance block</li>
-  <li>📣 Feature your brand in our outreach</li>
-  <li>🎁 Contribute prizes or experiences</li>
-</ul>
-<h2>
-  Interested? Reach out to <a href="mailto:jenntech2018@gmail.com">jenntech2018@gmail.com</a> and let’s collaborate.
-</h2>
+<div class="page-container">
+  <h1>🤝 Partners & Sponsorship</h1>
+  <p>
+    We’re building something big — and we’re looking for partners who believe in the power of local talent. Whether you want to sponsor a performance block, contribute prizes, or feature your brand in our outreach, we’d love to collaborate.
+  </p>
+  <p>
+    Use the form below to reach out directly. This channel is for partnership and sponsorship inquiries only.
+  </p>
+
+  <form method="post" action="{% url 'partner_contact' %}" class="contact-form">
+    {% csrf_token %}
+    <label for="name">Your Name</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="email">Your Email</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="message">Message</label>
+    <textarea name="message" id="message" rows="6" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+</div>
 {% endblock %}

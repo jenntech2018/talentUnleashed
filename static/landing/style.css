@@ -133,9 +133,13 @@ h3 {
 
 h2 {
   text-align: center;
-  font-size: large;
+  font-size: 1.8rem;
   color: white;
-  border:color-mix(in hsl shorter hue, color percentage, color percentage)
+  padding: 10px;
+  border-bottom: 4px solid;
+  border-image: linear-gradient(to right, #ff5f6d, #ffc371) 1;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px;
 }
 
 /* Buttons and links */
@@ -147,6 +151,64 @@ a.button {
   text-decoration: none;
   border-radius: 4px;
   margin-top: 1rem;
+}
+
+.page-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Raleway', sans-serif;
+  color: #333;
+}
+
+.page-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #222;
+  text-align: center;
+}
+
+.page-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+form.contact-form {
+  margin-top: 30px;
+}
+
+form.contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form.contact-form input,
+form.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+form.contact-form button {
+  background-color: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+form.contact-form button:hover {
+  background-color: #444;
 }
 
 button {
