@@ -14,7 +14,7 @@
     If you are looking to register for our event please visit our <a href="{% url 'register' %}">Register</a> page.
   </p>
 
-  <form method="post" action="{% url 'partner_contact' %}" class="contact-form">
+  <form method="post" action="{% url 'partners' %}" class="contact-form">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Send Message</button>

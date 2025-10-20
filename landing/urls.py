@@ -11,5 +11,4 @@ urlpatterns = [
     path('thank-you/', views.thank_you, name='thank_you'),
     path('about/', views.about, name='about'),
     path('partners/', views.partners, name='partners'),
-    path('partners/contact/', views.partner_contact, name='partner_contact'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
