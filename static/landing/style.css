@@ -228,6 +228,7 @@ form.contact-form h2 {
 }
 
 .thank-you-card .lead {
+  color: green;
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
