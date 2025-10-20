@@ -19,28 +19,54 @@ def partners(request):
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_protect
 
+from .forms import PartnerContactForm
+from django.core.mail import EmailMessage
+from django.views.decorators.csrf import csrf_protect
+
 @csrf_protect
 def partner_contact(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
+        form = PartnerContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
 
-        full_message = f"Partner Inquiry from {name} ({email}):\n\n{message}"
+            try:
+                # Admin notification
+                admin_email = EmailMessage(
+                    subject="New Partner/Sponsor Inquiry",
+                    body=(
+                        f"Partner Inquiry from {name} ({email}):\n\n{message}"
+                    ),
+                    from_email='jenntech2018@gmail.com',
+                    to=['jenntech2018@gmail.com'],
+                    reply_to=[email]
+                )
+                admin_email.send()
 
-        try:
-            send_mail(
-                subject="New Partner/Sponsor Inquiry",
-                message=full_message,
-                from_email='jenntech2018@gmail.com',
-                recipient_list=['jenntech2018@gmail.com'],
-                fail_silently=False
-            )
-        except Exception as e:
-            logger.exception("Partner contact email failed: %s", str(e))
-            # Optional: show a friendly message or redirect to an error page
+                # Confirmation to partner
+                send_mail(
+                    subject="Thanks for reaching out to Portland Brings Talent",
+                    message=(
+                        f"Hi {name},\n\n"
+                        "Thanks for your interest in partnering with Portland Brings Talent! "
+                        "We’ve received your message and will be in touch soon.\n\n"
+                        "Best,\nThe Portland Brings Talent Team"
+                    ),
+                    from_email='jenntech2018@gmail.com',
+                    recipient_list=[email],
+                    fail_silently=False
+                )
 
-        return redirect('thank_you')
+            except Exception as e:
+                logger.exception("Partner contact email failed: %s", str(e))
+
+            return redirect('thank_you')
+    else:
+        form = PartnerContactForm()
+
+    return render(request, 'landing/partner_contact.html', {'form': form})
 
 def register(request):
     if request.method == 'POST':
