@@ -8,20 +8,7 @@
   <p>Submit your talent and take the stage. We can't wait to see what you bring!</p>
 <form method="post" action="{% url 'register' %}" class="contact-form" enctype="multipart/form-data">
   {% csrf_token %}
-
-  <label for="name">Name or Group Name</label>
-  <input type="text" name="name" id="name" required>
-
-  <label for="email">Email</label>
-  <input type="email" name="email" id="email" required>
-
-  <label for="talent">Talent Description</label>
-  <textarea name="talent" id="talent" rows="6" required></textarea>
-  
-  <label for="group_toggle">
-  <input type="checkbox" name="is_group" id="group_toggle">
-    Is this a group performance?
-  </label>
+  {{ form.as_p }}
    <div id="groupSizeField" style="display: none;">
     {{ form.group_size.label_tag }} {{ form.group_size }}
   </div>
