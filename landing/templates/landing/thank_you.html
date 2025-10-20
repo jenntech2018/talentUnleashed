@@ -1,18 +1,23 @@
+{% extends 'landing/base.html' %}
 {% load static %}
-{% block title %}Portland Brings Talent - Thank You{% endblock %}
+{% block title %}Thank You – Portland Brings Talent{% endblock %}
 
-<link rel="stylesheet" href="{% static 'landing/style.css' %}">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Talent Unleashed</title>
-  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
-</head>
-<body>
-  <div class="container">
-<link rel="stylesheet" href="{% static 'landing/style.css' %}">
+{% block content %}
+<div class="thank-you-container">
+  <div class="thank-you-card">
+    <h1>🌟 Thank You!</h1>
+    <p class="lead">Your submission has been received. We'll be in touch soon!</p>
+    <p class="subtext">We’re thrilled to have you on board for Portland Brings Talent.</p>
 
-<h2>Thank You!</h2>
-<p>Your registration has been received. We'll be in touch soon!</p>
-<h3>&copy; 2025 Portland Brings Talent</h3>
+    <div class="flare">
+      <img src="{% static 'landing/confetti.gif' %}" alt="Confetti Celebration" />
+    </div>
+
+    <a href="{% url 'home' %}" class="btn-home">Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Portland Brings Talent</p>
+  </footer>
+</div>
+{% endblock %}
