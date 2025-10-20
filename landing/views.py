@@ -23,7 +23,7 @@ def thank_you(request):
 
 # Partner contact form
 @csrf_protect
-def partner_contact(request):
+def partners(request):
     if request.method == 'POST':
         form = PartnerContactForm(request.POST)
         if form.is_valid():
@@ -66,7 +66,7 @@ def partner_contact(request):
     else:
         form = PartnerContactForm()
 
-    return render(request, 'landing/partner_contact.html', {'form': form})
+    return render(request, 'landing/partners.html', {'form': form})
 
 # Contestant registration form
 @csrf_protect
