@@ -23,25 +23,24 @@ from .forms import PartnerContactForm
 from django.core.mail import EmailMessage
 from django.views.decorators.csrf import csrf_protect
 
+# views.py
 @csrf_protect
 def partner_contact(request):
     if request.method == 'POST':
         form = PartnerContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
+            inquiry = form.save()
 
             try:
                 # Admin notification
                 admin_email = EmailMessage(
                     subject="New Partner/Sponsor Inquiry",
                     body=(
-                        f"Partner Inquiry from {name} ({email}):\n\n{message}"
+                        f"Partner Inquiry from {inquiry.name} ({inquiry.email}):\n\n{inquiry.message}"
                     ),
                     from_email='jenntech2018@gmail.com',
                     to=['jenntech2018@gmail.com'],
-                    reply_to=[email]
+                    reply_to=[inquiry.email]
                 )
                 admin_email.send()
 
@@ -49,20 +48,20 @@ def partner_contact(request):
                 send_mail(
                     subject="Thanks for reaching out to Portland Brings Talent",
                     message=(
-                        f"Hi {name},\n\n"
+                        f"Hi {inquiry.name},\n\n"
                         "Thanks for your interest in partnering with Portland Brings Talent! "
                         "We’ve received your message and will be in touch soon.\n\n"
                         "Best,\nThe Portland Brings Talent Team"
                     ),
                     from_email='jenntech2018@gmail.com',
-                    recipient_list=[email],
+                    recipient_list=[inquiry.email],
                     fail_silently=False
                 )
 
             except Exception as e:
                 logger.exception("Partner contact email failed: %s", str(e))
 
-            return redirect('thank_you')
+            return render('landing/thank_you.html')
     else:
         form = PartnerContactForm()
 
@@ -140,7 +139,7 @@ def register(request):
                 except Exception as e:
                     logger.exception("Email send failed: %s", str(e))
 
-                return redirect('thank_you')
+                return render('landing/thank_you.html')
     else:
         form = ContestantForm()
 

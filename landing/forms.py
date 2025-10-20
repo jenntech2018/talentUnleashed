@@ -8,7 +8,11 @@ class ContestantForm(forms.ModelForm):
 
 from django import forms
 
-class PartnerContactForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)   
+# forms.py
+from django import forms
+from .models import PartnerInquiry
+
+class PartnerContactForm(forms.ModelForm):
+    class Meta:
+        model = PartnerInquiry
+        fields = ['name', 'email', 'message']
