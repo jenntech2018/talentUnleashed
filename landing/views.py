@@ -145,3 +145,6 @@ def register(request):
         form = ContestantForm()
 
     return render(request, 'landing/register.html', {'form': form})
+
+def thank_you(request):
+    return render(request, 'landing/thank_you.html')
