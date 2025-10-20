@@ -15,9 +15,6 @@ def home(request):
 def about(request):
     return render(request, 'landing/about.html')
 
-def partners(request):
-    return render(request, 'landing/partners.html')
-
 def thank_you(request):
     return render(request, 'landing/thank_you.html')
 
