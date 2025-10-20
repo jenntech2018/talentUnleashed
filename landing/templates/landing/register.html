@@ -12,9 +12,21 @@
    <div id="groupSizeField" style="display: none;">
     {{ form.group_size.label_tag }} {{ form.group_size }}
   </div>
+{% if form.errors %}
+  <ul class="errorlist">
+    {% for field in form %}
+      {% for error in field.errors %}
+        <li>{{ field.label }}: {{ error }}</li>
+      {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{{ form.video_submission.label_tag }}
+{{ form.video_submission }}
 
-  <label for="video">Video Submission</label>
-  <input type="file" name="video" id="video" accept="video/*">
 
   <button type="submit">Submit</button>
 </form>

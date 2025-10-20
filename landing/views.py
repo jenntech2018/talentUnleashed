@@ -68,20 +68,34 @@ def partner_contact(request):
 
     return render(request, 'landing/partner_contact.html', {'form': form})
 
+from django.shortcuts import render, redirect
+from .forms import ContestantForm
+from django.core.mail import send_mail, EmailMessage
+from django.views.decorators.csrf import csrf_protect
+import logging
+import os
+
+logger = logging.getLogger(__name__)
+
+@csrf_protect
 def register(request):
     if request.method == 'POST':
+        logger.info("Received POST to /register/")
         form = ContestantForm(request.POST, request.FILES)
+        logger.info("Form is valid: %s", form.is_valid())
+
         if form.is_valid():
             is_group = form.cleaned_data.get('is_group')
             group_size = form.cleaned_data.get('group_size')
 
-            if is_group and not group_size:
-                form.add_error('group_size', 'Please specify the number of participants.')
+            if is_group and (not group_size or group_size < 2):
+                form.add_error('group_size', 'Please specify a valid number of participants (minimum 2).')
             else:
                 contestant = form.save()
+                logger.info("Saved contestant: %s", contestant.name_or_group_name)
 
                 try:
-                    # Prepare admin email
+                    # Admin notification
                     admin_email = EmailMessage(
                         subject="New Portland Brings Talent Registration",
                         body=(
@@ -89,13 +103,15 @@ def register(request):
                             f"Email: {contestant.email}"
                         ),
                         from_email='jenntech2018@gmail.com',
-                        to=["jenntech2018@gmail.com"]
+                        to=['jenntech2018@gmail.com'],
+                        reply_to=[contestant.email]
                     )
 
                     # Attach video if present
                     if contestant.video_submission:
                         try:
                             video_path = contestant.video_submission.path
+                            logger.info("Video path: %s", video_path)
                             if os.path.exists(video_path):
                                 admin_email.attach_file(video_path)
                             else:
@@ -104,8 +120,9 @@ def register(request):
                             logger.exception("Failed to attach video file: %s", str(e))
 
                     admin_email.send()
+                    logger.info("Admin email sent successfully.")
 
-                    # Confirmation email to contestant
+                    # Confirmation to contestant
                     send_mail(
                         subject="Portland Brings Talent Registration Received",
                         message=(
@@ -118,6 +135,7 @@ def register(request):
                         recipient_list=[contestant.email],
                         fail_silently=False
                     )
+                    logger.info("Confirmation email sent to contestant.")
 
                 except Exception as e:
                     logger.exception("Email send failed: %s", str(e))
@@ -127,6 +145,3 @@ def register(request):
         form = ContestantForm()
 
     return render(request, 'landing/register.html', {'form': form})
-
-def thank_you(request):
-    return render(request, 'landing/thank_you.html')
