@@ -1,0 +1,19 @@
+# Exported from Render on 2025-10-20T19:31:28Z
+version: "1"
+services:
+- type: web
+  name: talent_Unleashed
+  runtime: python
+  repo: https://github.com/jenntech2018/talentUnleashed
+  plan: starter
+  envVars:
+  - key: DATABASE_URL
+    sync: false
+  - key: EMAIL_HOST_PASSWORD
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt && python manage.py collectstatic
+    --noinput
+  startCommand: gunicorn talent_show.wsgi:application
+  autoDeployTrigger: commit
+  rootDir: ./
