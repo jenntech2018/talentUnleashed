@@ -28,13 +28,17 @@ def partner_contact(request):
 
         full_message = f"Partner Inquiry from {name} ({email}):\n\n{message}"
 
-        send_mail(
-            subject="New Partner/Sponsor Inquiry",
-            message=full_message,
-            from_email='jenntech2018@gmail.com',
-            recipient_list=['jenntech2018@gmail.com'],
-            fail_silently=False
-        )
+        try:
+            send_mail(
+                subject="New Partner/Sponsor Inquiry",
+                message=full_message,
+                from_email='jenntech2018@gmail.com',
+                recipient_list=['jenntech2018@gmail.com'],
+                fail_silently=False
+            )
+        except Exception as e:
+            logger.exception("Partner contact email failed: %s", str(e))
+            # Optional: show a friendly message or redirect to an error page
 
         return redirect('thank_you')
 
