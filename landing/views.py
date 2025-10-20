@@ -61,7 +61,7 @@ def partner_contact(request):
             except Exception as e:
                 logger.exception("Partner contact email failed: %s", str(e))
 
-            return render('landing/thank_you.html')
+            return render(request, 'landing/thank_you.html')
     else:
         form = PartnerContactForm()
 
@@ -139,7 +139,7 @@ def register(request):
                 except Exception as e:
                     logger.exception("Email send failed: %s", str(e))
 
-                return render('landing/thank_you.html')
+                return render(request, 'landing/thank_you.html')
     else:
         form = ContestantForm()
 
