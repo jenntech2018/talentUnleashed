@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
-from .forms import ContestantForm
+from django.core.mail import send_mail, EmailMessage
+from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
-from django.core.mail import send_mail, EmailMessage, BadHeaderError
+from .forms import ContestantForm, PartnerContactForm
 import logging
 import os
 
 logger = logging.getLogger(__name__)
 
+# Static pages
 def home(request):
     return render(request, 'landing/home.html')
 
@@ -16,20 +18,17 @@ def about(request):
 def partners(request):
     return render(request, 'landing/partners.html')
 
-from django.core.mail import send_mail
-from django.views.decorators.csrf import csrf_protect
+def thank_you(request):
+    return render(request, 'landing/thank_you.html')
 
-from .forms import PartnerContactForm
-from django.core.mail import EmailMessage
-from django.views.decorators.csrf import csrf_protect
-
-# views.py
+# Partner contact form
 @csrf_protect
 def partner_contact(request):
     if request.method == 'POST':
         form = PartnerContactForm(request.POST)
         if form.is_valid():
             inquiry = form.save()
+            logger.info("Partner inquiry saved: %s", inquiry.name)
 
             try:
                 # Admin notification
@@ -43,6 +42,7 @@ def partner_contact(request):
                     reply_to=[inquiry.email]
                 )
                 admin_email.send()
+                logger.info("Partner inquiry email sent to admin.")
 
                 # Confirmation to partner
                 send_mail(
@@ -57,25 +57,18 @@ def partner_contact(request):
                     recipient_list=[inquiry.email],
                     fail_silently=False
                 )
+                logger.info("Confirmation email sent to partner.")
 
             except Exception as e:
                 logger.exception("Partner contact email failed: %s", str(e))
 
-            return render(request, 'landing/thank_you.html')
+            return redirect('thank_you')
     else:
         form = PartnerContactForm()
 
     return render(request, 'landing/partner_contact.html', {'form': form})
 
-from django.shortcuts import render, redirect
-from .forms import ContestantForm
-from django.core.mail import send_mail, EmailMessage
-from django.views.decorators.csrf import csrf_protect
-import logging
-import os
-
-logger = logging.getLogger(__name__)
-
+# Contestant registration form
 @csrf_protect
 def register(request):
     if request.method == 'POST':
@@ -107,16 +100,15 @@ def register(request):
                     )
 
                     # Attach video if present
-                    if contestant.video_submission:
+                    if contestant.video_submission and contestant.video_submission.storage.exists(contestant.video_submission.name):
                         try:
                             video_path = contestant.video_submission.path
                             logger.info("Video path: %s", video_path)
-                            if os.path.exists(video_path):
-                                admin_email.attach_file(video_path)
-                            else:
-                                logger.warning("Video file not found at: %s", video_path)
+                            admin_email.attach_file(video_path)
                         except Exception as e:
                             logger.exception("Failed to attach video file: %s", str(e))
+                    else:
+                        logger.info("No video submission found or file missing.")
 
                     admin_email.send()
                     logger.info("Admin email sent successfully.")
@@ -139,11 +131,8 @@ def register(request):
                 except Exception as e:
                     logger.exception("Email send failed: %s", str(e))
 
-                return render(request, 'landing/thank_you.html')
+                return redirect('thank_you')
     else:
         form = ContestantForm()
 
     return render(request, 'landing/register.html', {'form': form})
-
-def thank_you(request):
-    return render(request, 'landing/thank_you.html')
