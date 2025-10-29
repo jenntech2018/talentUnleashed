@@ -6,11 +6,13 @@
  <div class="page-container">
   <h1>🎤 Register as a Contestant</h1>
   <p>Submit your talent and take the stage. We can't wait to see what you bring!</p>
+<container id="textarea-container">
 <form method="post" action="{% url 'register' %}" class="contact-form" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Submit</button>
 </form>
+</container>
 
     <h3>&copy; 2025 Portland Brings Talent</h3>
   </div>
